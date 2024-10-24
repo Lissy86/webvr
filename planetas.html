@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://aframe.io/releases/1.6.0/aframe.min.js"></script>
+    <script src="https://unpkg.com/aframe-environment-component@1.3.3/dist/aframe-environment-component.min.js"></script>
+    <title>A-frame</title>
+</head>
+
+<body>
+    <a-scene>
+        <a-assets>
+            <a-image id="planetagaseoso" src="./espacio/PlanetTextures/Gaseous/Gaseous_08-1024x512.png"></a-image>
+            <a-image id="planetanevado" src="./espacio/PlanetTextures/Snowy/Snowy_04-1024x512.png"></a-image>
+            <a-image id="suelo" src="./espacio/PlanetTextures/Marshy/Marshy_02-1024x512.png"></a-image>
+            <a-curvedimage id="estrellas" src="./espacio/stars.jpg"></a-curvedimage>
+        </a-assets>
+        <a-sphere position="-700 400 -500" src="#planetagaseoso" radius="200" animation="property: rotation; to: 0 360; dur: 100000; easing: linear; loop: true"></a-sphere>
+        <a-sphere position="1800 -600 -1500" src="#planetanevado" radius="800" animation="property: rotation; to: 0 360; dur: 100000; easing: linear; loop: true"></a-sphere>
+        <a-entity environment="preset: dream; fog:0 ; skyType: none"></a-entity>
+        <!-- <a-circle src="#suelo"  position="0 0 0" radius="10" rotation="-90 0 0"></a-sphere> -->
+        <a-sky src="./espacio/stars.jpg" radius="10000" rotation="0 0 0"></a-sky>
+        <a-light  type="ambient" intensity="0.5" color="#pink" position="-1 1 0"></a-light>
+        <a-camera>
+            <a-cursor></a-cursor>
+        </a-camera>
+    </a-scene>
+</body>
+
+</html>
