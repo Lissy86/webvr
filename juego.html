@@ -1,0 +1,120 @@
+<html>
+
+<head>
+    <script src="https://aframe.io/releases/1.6.0/aframe.min.js"></script>
+    <script
+        src="https://unpkg.com/aframe-environment-component@1.3.3/dist/aframe-environment-component.min.js"></script>
+</head>
+
+<body>
+    <a-scene obb-colider="showColliders: false">
+        <a-entity environment="preset: starry"></a-entity>
+        <a-plane position="0 1 -10" color="black" width="6" height="20" rotation="-90 0 0"></a-plane>
+        <a-box id="caja" class="cajaAzul" position="4 1.5 -20" color="blue" obb-collider
+            animation="property: position; to: 2.5 1.5 0; dur: 3750; easing: linear;"></a-box>
+        <a-box id="caja" class="cajaAzul" position="-1 1.5 -20" color="blue" obb-collider
+            animation="property: position; to: -0.5 1.5 0; dur: 5000; easing: linear;"></a-box>
+        <a-box id="caja" class="cajaRoja" position="0 1.5 -20" color="red" obb-collider
+            animation="property: position; to: 0 1.5 0; dur: 3000; easing: linear;"></a-box>
+        <a-box id="caja" class="cajaAzul" position="3 1.5 -30" color="blue" obb-collider
+            animation="property: position; to: 1.5 1.5 0; dur: 5250; easing: linear;"></a-box>
+        <a-box id="caja" class="cajaAzul" position="5 1.5 -50" color="blue" obb-collider
+            animation="property: position; to: 0 1.5 0; dur: 6000; easing: linear;"></a-box>
+        <a-box id="caja" class="cajaRoja" position="-4 1.5 -30" color="red" obb-collider
+            animation="property: position; to: -2 1.5 0; dur: 4850; easing: linear;"></a-box>
+        <a-box id="caja" class="cajaRoja" position="-3 1.5 -90" color="red" obb-collider
+            animation="property: position; to: -1 1.5 0; dur: 6500; easing: linear;"></a-box>
+        <a-box id="caja" class="cajaAzul" position="4 1.5 -70" color="blue" obb-collider
+            animation="property: position; to: 0 1.5 0; dur: 6750; easing: linear;"></a-box>
+        <a-box id="caja" class="cajaAzul" position="-5 1.5 -100" color="blue" obb-collider
+            animation="property: position; to: -3 1.5 0; dur: 8000; easing: linear;"></a-box>
+        <a-box id="caja" class="cajaRoja" position="5 1.5 -90" color="red" obb-collider
+            animation="property: position; to: 3 1.5 0; dur: 7750; easing: linear;"></a-box>
+        <a-box id="caja" class="cajaAzul" position="0 1.5 -100" color="blue" obb-collider
+            animation="property: position; to: 0 1.5 0; dur: 9250; easing: linear;"></a-box>
+        <a-box id="caja" class="cajaAzul" position="5 1.5 -100" color="blue" obb-collider
+            animation="property: position; to: 3 1.5 0; dur: 8800; easing: linear;"></a-box>
+        <a-box id="caja" class="cajaAzul" position="-4 1.5 -120" color="blue" obb-collider
+            animation="property: position; to: -2 1.5 0; dur: 9500; easing: linear;"></a-box>
+        <a-box id="caja" class="cajaRoja" position="0 1.5 -120" color="red" obb-collider
+            animation="property: position; to: 0 1.5 0; dur: 9700; easing: linear;"></a-box>
+        <a-box id="caja" class="cajaAzul" position="3 1.5 -130" color="blue" obb-collider
+            animation="property: position; to: 0 1.5 0; dur: 9900; easing: linear;"></a-box>
+        <a-light type="ambient" position="0 0 0" color="white"></a-light>
+
+        <a-camera id="player" obb-collider>
+            <a-text id="vida" value="5" color="red" position="4 2 -3"></a-text>
+            <a-text id="puntuacion" value="0" color="blue" position="-4 2 -3"></a-text>
+            <a-text id="resultadoPerdedor"  value="Perdiste" color="white" visible="false" position="-0.5 2 -3"></a-text>
+            <a-text id="resultadoGanador"  value="Ganaste" color="white" visible="false" position="-0.5 2 -3"></a-text>
+            <a-cursor></a-cursor>
+        </a-camera>
+    </a-scene>
+    <script>
+        var caja = document.getElementById("caja");
+        var totalCajas = document.querySelectorAll('a-box');
+        var vida = document.getElementById("vida");
+        var puntuacion = document.getElementById("puntuacion");
+        var player = document.getElementById("player");
+        var resultadoPerdedor = document.getElementById("resultadoPerdedor");
+        var resultadoGanador = document.getElementById("resultadoGanador");
+        var juego = true;
+        
+        function verificarEstadoJuego() {
+            if (parseInt(vida.getAttribute("value")) <= 0 || parseInt(puntuacion.getAttribute("value")) >= 2) {
+                juego = false;
+                if(parseInt(vida.getAttribute("value")) <= 0){
+                    resultadoPerdedor.setAttribute("visible", "true");
+                }
+                else{
+                    resultadoGanador.setAttribute("visible", "true");
+                }
+            }
+        }
+        
+        totalCajas.forEach(function (caja) {
+            caja.addEventListener("mouseenter", function (event) {
+                this.setAttribute("color", "white");
+            });
+            caja.addEventListener("mouseleave", function (event) {
+                if (caja.classList.contains("cajaRoja")) {
+                    this.setAttribute("color", "red");
+                }
+                if (caja.classList.contains("cajaAzul")) {
+                    this.setAttribute("color", "blue");
+                }
+            });
+            caja.addEventListener("click", function (event) {
+                this.remove();
+                if (caja.classList.contains("cajaAzul") && juego) {
+                    vida.setAttribute("value", vida.getAttribute("value") - 1);
+                }
+                verificarEstadoJuego();
+            });
+            caja.addEventListener("animationcomplete", function () {
+                let posicionCaja = caja.getAttribute("position");
+                if (posicionCaja.z === 0 && juego) {
+                    vida.setAttribute("value", vida.getAttribute("value") - 1);
+                    caja.remove();
+                    verificarEstadoJuego();
+                }
+            });
+        });
+
+        player.addEventListener("obbcollisionstarted", function (event) {
+            var objetoColision = event.detail.withEl;
+            if (objetoColision.classList.contains("cajaRoja") && juego) {
+                vida.setAttribute("value", vida.getAttribute("value") - 1);
+            }
+            if (objetoColision.classList.contains("cajaAzul") && juego) {
+                puntuacion.setAttribute("value", parseInt(puntuacion.getAttribute("value")) + 1);
+            }
+            objetoColision.remove();
+            verificarEstadoJuego();
+        });
+
+       
+    </script>
+</body>
+
+</html>
