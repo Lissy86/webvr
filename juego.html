@@ -8,8 +8,10 @@
 
 <body>
     <a-scene obb-colider="showColliders: false">
-        <a-entity environment="preset: starry"></a-entity>
+        <!-- <a-entity environment="pink"></a-entity> -->
+         <button id="boton" visible="false" style="color: aliceblue; background-color: black;">Dificil</button>
         <a-plane position="0 1 -10" color="black" width="6" height="20" rotation="-90 0 0"></a-plane>
+        <!-- Dependiendo de la dificultad append child de las cajas -->
         <a-box id="caja" class="cajaAzul" position="4 1.5 -20" color="blue" obb-collider
             animation="property: position; to: 2.5 1.5 0; dur: 3750; easing: linear;"></a-box>
         <a-box id="caja" class="cajaAzul" position="-1 1.5 -20" color="blue" obb-collider
@@ -45,8 +47,8 @@
         <a-camera id="player" obb-collider>
             <a-text id="vida" value="5" color="red" position="4 2 -3"></a-text>
             <a-text id="puntuacion" value="0" color="blue" position="-4 2 -3"></a-text>
-            <a-text id="resultadoPerdedor"  value="Perdiste" color="white" visible="false" position="-0.5 2 -3"></a-text>
-            <a-text id="resultadoGanador"  value="Ganaste" color="white" visible="false" position="-0.5 2 -3"></a-text>
+            <a-text id="resultadoPerdedor"  value="Perdiste" color="black" visible="false" position="-0.5 2 -3"></a-text>
+            <a-text id="resultadoGanador"  value="Ganaste" color="black" visible="false" position="-0.5 2 -3"></a-text>
             <a-cursor></a-cursor>
         </a-camera>
     </a-scene>
@@ -58,10 +60,11 @@
         var player = document.getElementById("player");
         var resultadoPerdedor = document.getElementById("resultadoPerdedor");
         var resultadoGanador = document.getElementById("resultadoGanador");
+        var botonDificultad = document.getElementById("boton");
         var juego = true;
         
         function verificarEstadoJuego() {
-            if (parseInt(vida.getAttribute("value")) <= 0 || parseInt(puntuacion.getAttribute("value")) >= 2) {
+            if (parseInt(vida.getAttribute("value")) <= 0 || parseInt(puntuacion.getAttribute("value")) >= 7) {
                 juego = false;
                 if(parseInt(vida.getAttribute("value")) <= 0){
                     resultadoPerdedor.setAttribute("visible", "true");
@@ -69,12 +72,13 @@
                 else{
                     resultadoGanador.setAttribute("visible", "true");
                 }
+                botonDificultad.setAttribute("visible","true");
             }
         }
         
         totalCajas.forEach(function (caja) {
             caja.addEventListener("mouseenter", function (event) {
-                this.setAttribute("color", "white");
+                this.setAttribute("color", "orange");
             });
             caja.addEventListener("mouseleave", function (event) {
                 if (caja.classList.contains("cajaRoja")) {
