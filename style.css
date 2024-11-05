@@ -1,0 +1,37 @@
+.dark{
+    background-color: rgba(0,0,0,0.2);
+    border-radius:50px;  
+    background-repeat: no-repeat;
+    background-position: bottom right;
+    padding: 40px;
+  }
+  .menu{
+    width: 256px;
+    height: 768px;
+    text-align: center;
+  }
+  .menu ul{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+  a.button{
+    display: inline-block;
+    width: 100%;
+    border-radius: 20px;
+    background-color: #000;
+    color: #fff;
+    text-decoration: none;
+    text-align: center;
+    padding: 10px 0;
+    margin-bottom: 20px;
+  }
+  a.button:hover{
+    background-color: #fff;
+    color: #888;
+  }
+  a.button:active{
+    background-color: #fff;
+    color: #888;
+    box-shadow: 0px 0px 50px #00d2ff;
+  }
