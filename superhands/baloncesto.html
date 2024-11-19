@@ -1,0 +1,22 @@
+<head>
+  <title>Baloncesto</title>
+  <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.1/dist/aframe-extras.misc.min.js"></script>
+  <script src="https://unpkg.com/super-hands@^3.0.3/dist/super-hands.min.js"></script>
+  <script src="js/aframe-animation-timeline-component.min.js"></script>
+  <script src="js/aframe-physics-system.min.js"></script>
+</head>
+
+<body>
+  <a-scene>
+    <a-assets></a-assets>
+    <a-entity>
+      <a-camera></a-camera>
+      <a-entity sphere-collider="objects: a-box" super-hands hand-controls="hand: left"></a-entity>
+      <a-entity sphere-collider="objects: a-box" super-hands hand-controls="hand: right"></a-entity>
+    </a-entity>
+    <a-torus radius="0.6" radius-tubular="0.1" position="1 5 -4" rotation="0 90 0" color="#8800FF" material="src: #grid; repeat: 16 8;" shadow="cast: true; receive: true" animation__rotate="property: rotation; dur: 8000; easing: linear; dir: normal; from:30 -20 0; to: 30 -20 360; loop: true" geometry="">
+    </a-torus>
+    <a-sphere dynamic-body="" position="5 2 -5" radius="0.5" material="src:#ball; color:blue;" geometry="" velocity=""></a-sphere>
+  </a-scene>
+</body>
