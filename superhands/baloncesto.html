@@ -9,9 +9,11 @@
 
 <body>
   <a-scene physics="">
+   
     <a-assets>
       <img id="ground" src="/cancha.webp">
       <img id="ball" src="/pelota-baloncesto.avif">
+      <a-curvedimage id="grada" src="/bosque.jpg"></a-curvedimage>
     </a-assets>
     <a-assets>
       <a-mixin id="all-interactions" hoverable grabbable stretchable draggable
@@ -30,16 +32,18 @@
     </a-assets>
     <a-entity>
       <a-camera></a-camera>
+      <a-sky radius="10000" src="#grada" ></a-sky>
       <a-entity static-body="shape: sphere; sphereRadius: 0.02;" sphere-collider="objects: a-entity, a-sphere"
         super-hands hand-controls="hand: left"></a-entity>
       <a-entity static-body="shape: sphere; sphereRadius: 0.02;" sphere-collider="objects: a-entity, a-sphere"
         super-hands hand-controls="hand: right"></a-entity>
     </a-entity>
-    <a-torus radius="1" radius-tubular="0.05" position="0 3 -8" rotation="-90 0 0" color="#751212"
+    <a-torus static-body radius="1" radius-tubular="0.05" position="0 3 -8" rotation="-90 0 0" color="#751212"
       material="src: #grid; repeat: 16 8;" shadow="cast: true; receive: true"
       animation__rotate="property: rotation; dur: 8000; easing: linear; dir: normal; from:-90 -20 0; to: -90 -20 360; loop: true"
       geometry="">
     </a-torus>
+    <a-cylinder position="0 0 -9" rotation="0 0 0" radius="0.1" height="6" color="#751212" material="" geometry="" velocity=""></a-cylinder>
     <a-sphere dynamic-body hoverable grabbable draggable droppable position="0 1 -2" radius="0.5" material="src:#ball;"
       grab-options="scalable"></a-sphere>
     </a-entity>
